@@ -3,9 +3,13 @@
 import { useRouter } from "next/navigation";
 import CinnamonKitty from "@/components/CinnamonKitty";
 import SyncTimerPanel from "@/components/SyncTimerPanel";
+import Sparkles from "@/components/Sparkles";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useI18n } from "@/contexts/I18nContext";
 
 export default function HomePage() {
   const router = useRouter();
+  const { t } = useI18n();
 
   const handleCreate = async (
     mode: "stopwatch" | "countdown",
@@ -27,22 +31,29 @@ export default function HomePage() {
   };
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center px-4">
-      {/* Background */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-stone-950 via-stone-900/50 to-stone-950" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(196,133,92,0.08)_0%,_transparent_70%)]" />
+    <main className="relative flex min-h-screen flex-col items-center justify-center px-4 overflow-hidden">
+      {/* Soft pastel background */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-50 via-[#f0f4fa] to-blush-50" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(133,193,255,0.1)_0%,_transparent_60%)]" />
 
-      <div className="relative z-10 flex flex-col items-center gap-6 sm:gap-8">
+      {/* Language switcher */}
+      <div className="absolute top-4 right-4 z-20">
+        <LanguageSwitcher />
+      </div>
+
+      <Sparkles />
+
+      <div className="relative z-10 flex flex-col items-center gap-5 sm:gap-7">
         <CinnamonKitty />
 
-        <h1 className="font-serif text-3xl sm:text-4xl tracking-wide text-cinnamon-200">
-          Cinnamon Roll Timer
-        </h1>
-
-        <p className="text-sm text-stone-400 text-center max-w-xs">
-          Create a synced timer and share it with anyone. Everyone sees the same
-          time.
-        </p>
+        <div className="text-center">
+          <h1 className="font-serif text-3xl sm:text-5xl tracking-wide text-sky-500">
+            {t.appName}
+          </h1>
+          <p className="mt-2 text-sm text-blush-400/70 font-serif italic">
+            {t.tagline}
+          </p>
+        </div>
 
         <SyncTimerPanel onCreate={handleCreate} onJoin={handleJoin} />
       </div>

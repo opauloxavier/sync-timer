@@ -21,15 +21,15 @@ export default function TimerControls({
       <button
         onClick={onPlay}
         disabled={status === "running"}
-        className={`flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full transition-all active:scale-95 ${
+        className={`group flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full transition-all active:scale-90 ${
           status !== "running"
-            ? "bg-cinnamon-600 hover:bg-cinnamon-500 text-cinnamon-50 shadow-lg shadow-cinnamon-900/40"
-            : "bg-stone-800 text-stone-500 cursor-not-allowed"
+            ? "bg-gradient-to-br from-sky-400 to-sky-500 text-white shadow-lg shadow-sky-300/30 hover:shadow-sky-300/50 hover:scale-105"
+            : "bg-sky-100 text-sky-300 cursor-not-allowed"
         }`}
         aria-label="Play"
       >
         <svg
-          className="h-6 w-6 sm:h-7 sm:w-7 ml-0.5"
+          className="h-8 w-8 sm:h-10 sm:w-10 ml-1"
           fill="currentColor"
           viewBox="0 0 24 24"
         >
@@ -41,15 +41,15 @@ export default function TimerControls({
       <button
         onClick={onPause}
         disabled={status !== "running"}
-        className={`flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full transition-all active:scale-95 ${
+        className={`group flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full transition-all active:scale-90 ${
           status === "running"
-            ? "bg-cinnamon-600 hover:bg-cinnamon-500 text-cinnamon-50 shadow-lg shadow-cinnamon-900/40"
-            : "bg-stone-800 text-stone-500 cursor-not-allowed"
+            ? "bg-gradient-to-br from-blush-300 to-blush-400 text-white shadow-lg shadow-blush-300/30 hover:shadow-blush-300/50 hover:scale-105"
+            : "bg-blush-100 text-blush-300 cursor-not-allowed"
         }`}
         aria-label="Pause"
       >
         <svg
-          className="h-6 w-6 sm:h-7 sm:w-7"
+          className="h-8 w-8 sm:h-10 sm:w-10"
           fill="currentColor"
           viewBox="0 0 24 24"
         >
@@ -60,11 +60,11 @@ export default function TimerControls({
       {/* Restart */}
       <button
         onClick={onRestart}
-        className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-stone-800 hover:bg-stone-700 text-cinnamon-300 transition-all active:scale-95 shadow-lg shadow-stone-900/40"
+        className="group flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full bg-white/80 border border-sky-200/50 text-sky-400 transition-all active:scale-90 hover:bg-white hover:text-blush-400 hover:border-blush-200/50 hover:scale-105 shadow-sm"
         aria-label="Restart"
       >
         <svg
-          className="h-6 w-6 sm:h-7 sm:w-7"
+          className="h-8 w-8 sm:h-10 sm:w-10 transition-transform group-hover:rotate-[-45deg]"
           fill="none"
           stroke="currentColor"
           strokeWidth={2.5}

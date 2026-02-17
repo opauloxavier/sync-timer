@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
-import { v4 as uuidv4 } from "uuid";
 import { redis } from "@/lib/redis";
 import { TimerState, TTL_SECONDS, timerToHash } from "@/lib/timer";
+import { generateFriendlyId } from "@/lib/names";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
@@ -17,7 +17,16 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const id = uuidv4();
+  // Generate a friendly ID and ensure it's unique
+  let id = generateFriendlyId();
+  let attempts = 0;
+  while (attempts < 5) {
+    const existing = await redis.exists(`timer:${id}`);
+    if (!existing) break;
+    id = generateFriendlyId();
+    attempts++;
+  }
+
   const now = Date.now();
 
   const timer: TimerState = {

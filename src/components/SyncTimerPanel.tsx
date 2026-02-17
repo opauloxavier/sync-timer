@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useI18n } from "@/contexts/I18nContext";
 
 interface SyncTimerPanelProps {
   onCreate: (mode: "stopwatch" | "countdown", durationMs?: number) => void;
@@ -16,6 +17,7 @@ export default function SyncTimerPanel({
   const [minutes, setMinutes] = useState(5);
   const [seconds, setSeconds] = useState(0);
   const [isCreating, setIsCreating] = useState(false);
+  const { t } = useI18n();
 
   const handleJoin = () => {
     if (timerId.trim()) {
@@ -36,54 +38,64 @@ export default function SyncTimerPanel({
   };
 
   return (
-    <div className="w-full max-w-sm space-y-6">
+    <div className="w-full max-w-sm space-y-5">
       {/* Join section */}
-      <div className="space-y-3">
+      <div className="space-y-2.5 rounded-2xl bg-white/60 border border-sky-200/40 p-4 backdrop-blur-sm shadow-sm">
+        <p className="text-center text-xs font-serif italic text-sky-400/70">
+          {t.joinFriendTimer}
+        </p>
         <input
           type="text"
           value={timerId}
           onChange={(e) => setTimerId(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleJoin()}
-          placeholder="Enter Timer ID"
-          className="w-full rounded-lg border border-stone-700 bg-stone-900/80 px-4 py-3 text-center text-amber-100 placeholder-stone-500 outline-none transition-all focus:border-cinnamon-500 focus:ring-1 focus:ring-cinnamon-500"
+          placeholder={t.pasteTimerId}
+          className="w-full rounded-xl border border-sky-200/50 bg-white/80 px-4 py-3 text-center text-sky-600 placeholder-sky-300/50 outline-none transition-all focus:border-sky-400/60 focus:ring-1 focus:ring-sky-300/30 text-sm"
         />
         <button
           onClick={handleJoin}
           disabled={!timerId.trim()}
-          className="w-full rounded-lg bg-stone-800 px-4 py-3 font-serif text-lg text-cinnamon-200 transition-all hover:bg-stone-700 disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.98]"
+          className="w-full rounded-xl bg-white/80 border border-sky-200/50 px-4 py-2.5 font-serif text-base text-sky-500 transition-all hover:bg-sky-50 hover:border-sky-300/50 disabled:opacity-30 disabled:cursor-not-allowed active:scale-[0.98]"
         >
-          Join Timer
+          {t.joinTimer}
         </button>
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="h-px flex-1 bg-stone-700" />
-        <span className="text-sm text-stone-500">or</span>
-        <div className="h-px flex-1 bg-stone-700" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-sky-200/40 to-transparent" />
+        <span className="text-xs text-blush-300 font-serif italic">
+          {t.orCreateNew}
+        </span>
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-blush-200/40 to-transparent" />
       </div>
 
       {/* Create section */}
-      <div className="space-y-3">
+      <div className="space-y-2.5">
         <button
           onClick={handleCreateStopwatch}
           disabled={isCreating}
-          className="w-full rounded-lg bg-cinnamon-600 px-4 py-3 font-serif text-lg text-cinnamon-50 transition-all hover:bg-cinnamon-500 disabled:opacity-60 active:scale-[0.98] shadow-lg shadow-cinnamon-900/30"
+          className="w-full rounded-2xl bg-gradient-to-r from-sky-400 to-sky-500 px-4 py-3.5 font-serif text-lg text-white transition-all hover:shadow-lg hover:shadow-sky-300/30 disabled:opacity-60 active:scale-[0.98] shadow-md shadow-sky-200/40"
         >
-          {isCreating ? "Creating..." : "Create Stopwatch"}
+          {isCreating ? t.creating : t.createStopwatch}
         </button>
 
         {!showCountdown ? (
           <button
             onClick={() => setShowCountdown(true)}
-            className="w-full rounded-lg bg-stone-800 px-4 py-3 font-serif text-lg text-cinnamon-200 transition-all hover:bg-stone-700 active:scale-[0.98]"
+            className="w-full rounded-2xl bg-white/60 border border-blush-200/40 px-4 py-3 font-serif text-base text-blush-400 transition-all hover:bg-blush-50/60 hover:border-blush-300/40 active:scale-[0.98] shadow-sm"
           >
-            Create Countdown
+            {t.createCountdown}
           </button>
         ) : (
-          <div className="space-y-3 rounded-xl bg-stone-900/60 p-4 border border-stone-800">
-            <div className="flex items-center justify-center gap-2">
+          <div className="space-y-3 rounded-2xl bg-white/60 border border-blush-200/40 p-4 backdrop-blur-sm shadow-sm">
+            <p className="text-center text-xs font-serif italic text-blush-300">
+              {t.setYourTimer}
+            </p>
+            <div className="flex items-center justify-center gap-3">
               <div className="flex flex-col items-center">
-                <label className="text-xs text-stone-400 mb-1">Minutes</label>
+                <label className="text-[10px] text-sky-400/60 mb-1 font-serif">
+                  {t.min}
+                </label>
                 <input
                   type="number"
                   min={0}
@@ -92,12 +104,16 @@ export default function SyncTimerPanel({
                   onChange={(e) =>
                     setMinutes(Math.max(0, parseInt(e.target.value) || 0))
                   }
-                  className="w-20 rounded-lg border border-stone-700 bg-stone-800 px-2 py-2 text-center text-xl text-amber-100 outline-none focus:border-cinnamon-500"
+                  className="w-20 rounded-xl border border-sky-200/50 bg-white/80 px-2 py-2.5 text-center text-2xl font-serif text-sky-500 outline-none focus:border-sky-400/60"
                 />
               </div>
-              <span className="text-2xl text-stone-500 mt-4">:</span>
+              <span className="text-2xl text-blush-300/50 mt-4 font-serif">
+                :
+              </span>
               <div className="flex flex-col items-center">
-                <label className="text-xs text-stone-400 mb-1">Seconds</label>
+                <label className="text-[10px] text-sky-400/60 mb-1 font-serif">
+                  {t.sec}
+                </label>
                 <input
                   type="number"
                   min={0}
@@ -108,16 +124,16 @@ export default function SyncTimerPanel({
                       Math.min(59, Math.max(0, parseInt(e.target.value) || 0))
                     )
                   }
-                  className="w-20 rounded-lg border border-stone-700 bg-stone-800 px-2 py-2 text-center text-xl text-amber-100 outline-none focus:border-cinnamon-500"
+                  className="w-20 rounded-xl border border-sky-200/50 bg-white/80 px-2 py-2.5 text-center text-2xl font-serif text-sky-500 outline-none focus:border-sky-400/60"
                 />
               </div>
             </div>
             <button
               onClick={handleCreateCountdown}
               disabled={isCreating || (minutes === 0 && seconds === 0)}
-              className="w-full rounded-lg bg-cinnamon-600 px-4 py-3 font-serif text-lg text-cinnamon-50 transition-all hover:bg-cinnamon-500 disabled:opacity-60 active:scale-[0.98] shadow-lg shadow-cinnamon-900/30"
+              className="w-full rounded-2xl bg-gradient-to-r from-blush-300 to-blush-400 px-4 py-3 font-serif text-base text-white transition-all hover:shadow-lg hover:shadow-blush-300/30 disabled:opacity-40 active:scale-[0.98] shadow-md shadow-blush-200/40"
             >
-              {isCreating ? "Creating..." : "Start Countdown"}
+              {isCreating ? t.creating : t.startCountdown}
             </button>
           </div>
         )}
