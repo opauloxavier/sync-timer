@@ -26,6 +26,26 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
+  openGraph: {
+    title: "Sweet Timer",
+    description: "Sweet moments, shared together. Create, share, and sync timers with anyone!",
+    siteName: "Sweet Timer",
+    images: [
+      {
+        url: "/android-chrome-512x512.png",
+        width: 512,
+        height: 512,
+        alt: "Sweet Timer",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Sweet Timer",
+    description: "Sweet moments, shared together. Create, share, and sync timers with anyone!",
+    images: ["/android-chrome-512x512.png"],
+  },
 };
 
 export default function RootLayout({
