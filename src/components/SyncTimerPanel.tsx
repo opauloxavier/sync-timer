@@ -14,8 +14,8 @@ export default function SyncTimerPanel({
 }: SyncTimerPanelProps) {
   const [timerId, setTimerId] = useState("");
   const [showCountdown, setShowCountdown] = useState(false);
-  const [minutes, setMinutes] = useState(5);
-  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(30);
   const [isCreating, setIsCreating] = useState(false);
   const { t } = useI18n();
 
