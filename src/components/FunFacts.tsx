@@ -62,7 +62,7 @@ export default function FunFacts() {
 
       {/* Fact card */}
       <div
-        className={`flex-1 rounded-2xl bg-white/50 border border-sky-100/60 px-4 py-3 backdrop-blur-sm shadow-sm transition-opacity duration-250 ${
+        className={`flex-1 rounded-2xl bg-white/50 border border-sky-100/60 px-4 py-3 backdrop-blur-sm shadow-sm transition-opacity duration-250 h-[4.5rem] sm:h-16 flex items-center justify-center ${
           fading ? "opacity-0" : "opacity-100"
         }`}
       >
