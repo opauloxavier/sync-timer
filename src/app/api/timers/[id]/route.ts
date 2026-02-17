@@ -78,3 +78,17 @@ export async function PATCH(
 
   return Response.json(timer);
 }
+
+export async function DELETE(
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
+  const deleted = await redis.del(`timer:${id}`);
+
+  if (!deleted) {
+    return Response.json({ error: "Timer not found" }, { status: 404 });
+  }
+
+  return Response.json({ success: true });
+}

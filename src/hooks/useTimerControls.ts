@@ -18,9 +18,14 @@ export function useTimerControls(timerId: string) {
     [timerId]
   );
 
+  const deleteTimer = useCallback(async () => {
+    await fetch(`/api/timers/${timerId}`, { method: "DELETE" });
+  }, [timerId]);
+
   return {
     play: () => sendAction("play"),
     pause: () => sendAction("pause"),
     restart: () => sendAction("restart"),
+    deleteTimer,
   };
 }

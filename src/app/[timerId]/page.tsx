@@ -1,6 +1,7 @@
 "use client";
 
-import { use } from "react";
+import { use, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useTimer } from "@/hooks/useTimer";
 import { useTimerControls } from "@/hooks/useTimerControls";
 import TimerDisplay from "@/components/TimerDisplay";
@@ -19,8 +20,17 @@ export default function TimerPage({
 }) {
   const { timerId } = use(params);
   const { timerState, displayMs, isLoading, error } = useTimer(timerId);
-  const { play, pause, restart } = useTimerControls(timerId);
+  const { play, pause, restart, deleteTimer } = useTimerControls(timerId);
   const { t } = useI18n();
+  const router = useRouter();
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    await deleteTimer();
+    router.push("/");
+  };
 
   if (isLoading) {
     return (
@@ -86,12 +96,58 @@ export default function TimerPage({
           onRestart={restart}
         />
 
-        <Link
-          href="/"
-          className="mt-2 text-sm text-sky-400/50 hover:text-blush-400 transition-colors font-serif"
-        >
-          {t.createNewTimerLink}
-        </Link>
+        <div className="flex flex-col items-center gap-3 mt-2">
+          <Link
+            href="/"
+            className="text-sm text-sky-400/50 hover:text-blush-400 transition-colors font-serif"
+          >
+            {t.createNewTimerLink}
+          </Link>
+
+          {/* Delete timer */}
+          {!showDeleteConfirm ? (
+            <button
+              onClick={() => setShowDeleteConfirm(true)}
+              className="flex items-center gap-1.5 text-xs text-sky-300/40 hover:text-red-400 transition-colors font-serif group"
+            >
+              <svg
+                className="h-3.5 w-3.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                />
+              </svg>
+              {t.deleteTimer}
+            </button>
+          ) : (
+            <div className="flex flex-col items-center gap-2 rounded-2xl bg-white/80 border border-red-200/50 px-5 py-3 backdrop-blur-sm shadow-sm">
+              <p className="text-xs text-red-400/80 font-serif text-center">
+                {t.deleteConfirm}
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={handleDelete}
+                  disabled={isDeleting}
+                  className="rounded-xl bg-red-400 px-4 py-1.5 text-xs text-white font-serif transition-all hover:bg-red-500 active:scale-95 disabled:opacity-50"
+                >
+                  {isDeleting ? t.deleting : t.deleteTimer}
+                </button>
+                <button
+                  onClick={() => setShowDeleteConfirm(false)}
+                  className="rounded-xl bg-white border border-sky-200/50 px-4 py-1.5 text-xs text-sky-400 font-serif transition-all hover:bg-sky-50 active:scale-95"
+                >
+                  cancel
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </main>
   );
