@@ -39,36 +39,6 @@ export default function SyncTimerPanel({
 
   return (
     <div className="w-full max-w-sm space-y-5">
-      {/* Join section */}
-      <div className="space-y-2.5 rounded-2xl bg-white/60 border border-sky-200/40 p-4 backdrop-blur-sm shadow-sm">
-        <p className="text-center text-xs font-serif italic text-sky-400/70">
-          {t.joinFriendTimer}
-        </p>
-        <input
-          type="text"
-          value={timerId}
-          onChange={(e) => setTimerId(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleJoin()}
-          placeholder={t.pasteTimerId}
-          className="w-full rounded-xl border border-sky-200/50 bg-white/80 px-4 py-3 text-center text-sky-600 placeholder-sky-300/50 outline-none transition-all focus:border-sky-400/60 focus:ring-1 focus:ring-sky-300/30 text-sm"
-        />
-        <button
-          onClick={handleJoin}
-          disabled={!timerId.trim()}
-          className="w-full rounded-xl bg-white/80 border border-sky-200/50 px-4 py-2.5 font-serif text-base text-sky-500 transition-all hover:bg-sky-50 hover:border-sky-300/50 disabled:opacity-30 disabled:cursor-not-allowed active:scale-[0.98]"
-        >
-          {t.joinTimer}
-        </button>
-      </div>
-
-      <div className="flex items-center gap-3">
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-sky-200/40 to-transparent" />
-        <span className="text-xs text-blush-300 font-serif italic">
-          {t.orCreateNew}
-        </span>
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-blush-200/40 to-transparent" />
-      </div>
-
       {/* Create section */}
       <div className="space-y-2.5">
         <button
@@ -137,6 +107,33 @@ export default function SyncTimerPanel({
             </button>
           </div>
         )}
+      </div>
+
+      <div className="flex items-center gap-3">
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-sky-200/40 to-transparent" />
+        <span className="text-xs text-blush-300 font-serif italic">
+          {t.orJoinFriend}
+        </span>
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-blush-200/40 to-transparent" />
+      </div>
+
+      {/* Join section */}
+      <div className="space-y-2.5 rounded-2xl bg-white/60 border border-sky-200/40 p-4 backdrop-blur-sm shadow-sm">
+        <input
+          type="text"
+          value={timerId}
+          onChange={(e) => setTimerId(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleJoin()}
+          placeholder={t.pasteTimerId}
+          className="w-full rounded-xl border border-sky-200/50 bg-white/80 px-4 py-3 text-center text-sky-600 placeholder-sky-300/50 outline-none transition-all focus:border-sky-400/60 focus:ring-1 focus:ring-sky-300/30 text-sm"
+        />
+        <button
+          onClick={handleJoin}
+          disabled={!timerId.trim()}
+          className="w-full rounded-xl bg-white/80 border border-sky-200/50 px-4 py-2.5 font-serif text-base text-sky-500 transition-all hover:bg-sky-50 hover:border-sky-300/50 disabled:opacity-30 disabled:cursor-not-allowed active:scale-[0.98]"
+        >
+          {t.joinTimer}
+        </button>
       </div>
     </div>
   );
