@@ -10,6 +10,7 @@ import TimerIdBadge from "@/components/TimerIdBadge";
 import CinnamonKitty from "@/components/CinnamonKitty";
 import Sparkles from "@/components/Sparkles";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import FunFacts from "@/components/FunFacts";
 import Link from "next/link";
 import { useI18n } from "@/contexts/I18nContext";
 
@@ -87,7 +88,7 @@ export default function TimerPage({
 
         <CinnamonKitty />
 
-        <TimerDisplay displayMs={displayMs} status={timerState.status} />
+        <TimerDisplay displayMs={displayMs} status={timerState.status} mode={timerState.mode} />
 
         <TimerControls
           status={timerState.status}
@@ -95,6 +96,8 @@ export default function TimerPage({
           onPause={pause}
           onRestart={restart}
         />
+
+        <FunFacts />
 
         <div className="flex flex-col items-center gap-3 mt-2">
           <Link
@@ -123,12 +126,12 @@ export default function TimerPage({
                   d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                 />
               </svg>
-              {t.deleteTimer}
+              {timerState.mode === "countdown" ? t.deleteCountdown : t.deleteStopwatch}
             </button>
           ) : (
             <div className="flex flex-col items-center gap-2 rounded-2xl bg-white/80 border border-red-200/50 px-5 py-3 backdrop-blur-sm shadow-sm">
               <p className="text-xs text-red-400/80 font-serif text-center">
-                {t.deleteConfirm}
+                {timerState.mode === "countdown" ? t.deleteCountdownConfirm : t.deleteStopwatchConfirm}
               </p>
               <div className="flex gap-3">
                 <button
@@ -136,7 +139,7 @@ export default function TimerPage({
                   disabled={isDeleting}
                   className="rounded-xl bg-red-400 px-4 py-1.5 text-xs text-white font-serif transition-all hover:bg-red-500 active:scale-95 disabled:opacity-50"
                 >
-                  {isDeleting ? t.deleting : t.deleteTimer}
+                  {isDeleting ? t.deleting : timerState.mode === "countdown" ? t.deleteCountdown : t.deleteStopwatch}
                 </button>
                 <button
                   onClick={() => setShowDeleteConfirm(false)}

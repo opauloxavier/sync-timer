@@ -30,6 +30,12 @@
   --animate-float: float 3s ease-in-out infinite;
   --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
   --animate-sparkle: sparkle 2.5s ease-in-out infinite;
+  --animate-celebrate: celebrate 0.6s ease-out;
+  --animate-confetti: confetti 1.5s ease-out forwards;
+  --animate-bounce-in: bounce-in 0.5s ease-out;
+  --animate-kitty-wobble: kitty-wobble 0.4s ease-in-out;
+  --animate-kitty-spin: kitty-spin 0.6s ease-in-out;
+  --animate-kitty-wiggle: kitty-wiggle 0.8s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -63,6 +69,98 @@
   50% {
     opacity: 0.8;
     transform: scale(1.3);
+  }
+}
+
+@keyframes celebrate {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.15);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes confetti {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) rotate(720deg);
+  }
+}
+
+@keyframes kitty-wobble {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-12deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-6deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes kitty-spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes kitty-wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-5deg);
+  }
+  40% {
+    transform: rotate(5deg);
+  }
+  60% {
+    transform: rotate(-3deg);
+  }
+  80% {
+    transform: rotate(3deg);
   }
 }
 

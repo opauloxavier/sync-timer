@@ -1,4 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
+"use client";
+
+import { useState, useRef } from "react";
 
 interface CinnamonKittyProps {
   size?: "sm" | "lg";
@@ -11,6 +14,30 @@ export default function CinnamonKitty({ size = "lg" }: CinnamonKittyProps) {
       : "w-20 h-20 sm:w-24 sm:h-24";
 
   const sparkleSize = size === "lg" ? "text-sm" : "text-[10px]";
+
+  const [animation, setAnimation] = useState<"" | "wobble" | "spin">("");
+  const clickTimes = useRef<number[]>([]);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
+
+  const handleClick = () => {
+    const now = Date.now();
+    clickTimes.current.push(now);
+    // Keep only clicks within the last 800ms
+    clickTimes.current = clickTimes.current.filter((t) => now - t < 800);
+
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+    if (clickTimes.current.length >= 3) {
+      // Rapid clicks → spin!
+      setAnimation("spin");
+      clickTimes.current = [];
+      timeoutRef.current = setTimeout(() => setAnimation(""), 600);
+    } else {
+      // Single tap → wobble
+      setAnimation("wobble");
+      timeoutRef.current = setTimeout(() => setAnimation(""), 400);
+    }
+  };
 
   return (
     <div className="relative">
@@ -41,7 +68,14 @@ export default function CinnamonKitty({ size = "lg" }: CinnamonKittyProps) {
       </div>
 
       <div
-        className={`${dimensions} animate-float drop-shadow-[0_4px_24px_rgba(91,168,245,0.2)]`}
+        onClick={handleClick}
+        className={`${dimensions} animate-float drop-shadow-[0_4px_24px_rgba(91,168,245,0.2)] cursor-pointer select-none ${
+          animation === "spin"
+            ? "animate-kitty-spin"
+            : animation === "wobble"
+            ? "animate-kitty-wobble"
+            : "hover:animate-kitty-wiggle"
+        }`}
       >
         <img
           src="/cinnamoroll.svg"

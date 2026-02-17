@@ -61,6 +61,29 @@ export default function SyncTimerPanel({
             <p className="text-center text-xs font-serif italic text-blush-300">
               {t.setYourTimer}
             </p>
+            {/* Quick presets */}
+            <div className="flex items-center justify-center gap-2">
+              {[
+                { label: "10s", m: 0, s: 10 },
+                { label: "30s", m: 0, s: 30 },
+                { label: "1m", m: 1, s: 0 },
+              ].map((preset) => (
+                <button
+                  key={preset.label}
+                  onClick={() => {
+                    setMinutes(preset.m);
+                    setSeconds(preset.s);
+                  }}
+                  className={`rounded-full px-3.5 py-1 text-xs font-serif transition-all active:scale-95 ${
+                    minutes === preset.m && seconds === preset.s
+                      ? "bg-blush-300 text-white shadow-sm"
+                      : "bg-white/80 border border-blush-200/50 text-blush-400 hover:bg-blush-50"
+                  }`}
+                >
+                  {preset.label}
+                </button>
+              ))}
+            </div>
             <div className="flex items-center justify-center gap-3">
               <div className="flex flex-col items-center">
                 <label className="text-[10px] text-sky-400/60 mb-1 font-serif">

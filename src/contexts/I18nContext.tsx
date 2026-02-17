@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { Locale, Translations, getTranslations, detectLocale } from "@/lib/i18n";
 
 interface I18nContextValue {
@@ -11,15 +11,18 @@ interface I18nContextValue {
 
 const I18nContext = createContext<I18nContextValue | null>(null);
 
-function getInitialLocale(): Locale {
-  if (typeof window === "undefined") return "en";
-  const saved = localStorage.getItem("locale") as Locale | null;
-  if (saved && ["en", "pt-BR", "es"].includes(saved)) return saved;
-  return detectLocale();
-}
-
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocale] = useState<Locale>(getInitialLocale);
+  const [locale, setLocale] = useState<Locale>("en");
+
+  // Detect locale after hydration to avoid server/client mismatch
+  useEffect(() => {
+    const saved = localStorage.getItem("locale") as Locale | null;
+    if (saved && ["en", "pt-BR", "es"].includes(saved)) {
+      setLocale(saved);
+    } else {
+      setLocale(detectLocale());
+    }
+  }, []);
 
   const handleSetLocale = (newLocale: Locale) => {
     setLocale(newLocale);
