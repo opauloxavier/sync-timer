@@ -53,7 +53,7 @@ export default function FunFacts() {
       <button
         onClick={prev}
         aria-label="Previous fact"
-        className="shrink-0 flex items-center justify-center h-7 w-7 rounded-full text-sky-300/50 hover:text-sky-400 hover:bg-white/60 transition-all active:scale-90"
+        className="shrink-0 flex items-center justify-center h-7 w-7 rounded-full text-sky-300/50 hover:text-sky-400 hover:bg-white/60 dark:hover:bg-white/10 transition-all active:scale-90"
       >
         <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -62,7 +62,7 @@ export default function FunFacts() {
 
       {/* Fact card */}
       <div
-        className={`flex-1 rounded-2xl bg-white/50 border border-sky-100/60 px-4 py-3 backdrop-blur-sm shadow-sm transition-opacity duration-250 h-[4.5rem] sm:h-16 flex items-center justify-center ${
+        className={`flex-1 rounded-2xl bg-white/50 dark:bg-white/[0.06] border border-sky-100/60 dark:border-sky-500/15 px-4 py-3 backdrop-blur-sm shadow-sm transition-opacity duration-250 h-[4.5rem] sm:h-16 flex items-center justify-center ${
           fading ? "opacity-0" : "opacity-100"
         }`}
       >
@@ -76,7 +76,7 @@ export default function FunFacts() {
       <button
         onClick={next}
         aria-label="Next fact"
-        className="shrink-0 flex items-center justify-center h-7 w-7 rounded-full text-sky-300/50 hover:text-sky-400 hover:bg-white/60 transition-all active:scale-90"
+        className="shrink-0 flex items-center justify-center h-7 w-7 rounded-full text-sky-300/50 hover:text-sky-400 hover:bg-white/60 dark:hover:bg-white/10 transition-all active:scale-90"
       >
         <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

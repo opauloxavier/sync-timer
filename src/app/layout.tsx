@@ -55,9 +55,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body
-        className={`${instrumentSerif.variable} ${inter.variable} min-h-screen bg-[#f0f4fa] text-[#3a4a6b] antialiased`}
+        className={`${instrumentSerif.variable} ${inter.variable} min-h-screen bg-[#f0f4fa] text-[#3a4a6b] dark:bg-[#141a2e] dark:text-[#c8d3e8] antialiased`}
       >
         <I18nProvider>{children}</I18nProvider>
       </body>

@@ -5,6 +5,7 @@ import CinnamonKitty from "@/components/CinnamonKitty";
 import SyncTimerPanel from "@/components/SyncTimerPanel";
 import Sparkles from "@/components/Sparkles";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import ThemeToggle from "@/components/ThemeToggle";
 import { useI18n } from "@/contexts/I18nContext";
 
 export default function HomePage() {
@@ -33,11 +34,12 @@ export default function HomePage() {
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center px-4 overflow-hidden">
       {/* Soft pastel background */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-50 via-[#f0f4fa] to-blush-50" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(133,193,255,0.1)_0%,_transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-50 via-[#f0f4fa] to-blush-50 dark:from-[#0f1525] dark:via-[#141a2e] dark:to-[#1a1528]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(133,193,255,0.1)_0%,_transparent_60%)] dark:bg-[radial-gradient(ellipse_at_center,_rgba(91,168,245,0.08)_0%,_transparent_60%)]" />
 
-      {/* Language switcher */}
-      <div className="absolute top-4 right-4 z-20">
+      {/* Controls */}
+      <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
+        <ThemeToggle />
         <LanguageSwitcher />
       </div>
 

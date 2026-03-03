@@ -52,12 +52,12 @@ export default function SyncTimerPanel({
         {!showCountdown ? (
           <button
             onClick={() => setShowCountdown(true)}
-            className="w-full rounded-2xl bg-white/60 border border-blush-200/40 px-4 py-3 font-serif text-base text-blush-400 transition-all hover:bg-blush-50/60 hover:border-blush-300/40 active:scale-[0.98] shadow-sm"
+            className="w-full rounded-2xl bg-white/60 dark:bg-white/[0.06] border border-blush-200/40 dark:border-blush-400/15 px-4 py-3 font-serif text-base text-blush-400 transition-all hover:bg-blush-50/60 dark:hover:bg-white/10 hover:border-blush-300/40 active:scale-[0.98] shadow-sm"
           >
             {t.createCountdown}
           </button>
         ) : (
-          <div className="space-y-3 rounded-2xl bg-white/60 border border-blush-200/40 p-4 backdrop-blur-sm shadow-sm">
+          <div className="space-y-3 rounded-2xl bg-white/60 dark:bg-white/[0.06] border border-blush-200/40 dark:border-blush-400/15 p-4 backdrop-blur-sm shadow-sm">
             <p className="text-center text-xs font-serif italic text-blush-300">
               {t.setYourTimer}
             </p>
@@ -77,7 +77,7 @@ export default function SyncTimerPanel({
                   className={`rounded-full px-3.5 py-1 text-xs font-serif transition-all active:scale-95 ${
                     minutes === preset.m && seconds === preset.s
                       ? "bg-blush-300 text-white shadow-sm"
-                      : "bg-white/80 border border-blush-200/50 text-blush-400 hover:bg-blush-50"
+                      : "bg-white/80 dark:bg-white/[0.06] border border-blush-200/50 dark:border-blush-400/15 text-blush-400 hover:bg-blush-50 dark:hover:bg-white/10"
                   }`}
                 >
                   {preset.label}
@@ -97,7 +97,7 @@ export default function SyncTimerPanel({
                   onChange={(e) =>
                     setMinutes(Math.max(0, parseInt(e.target.value) || 0))
                   }
-                  className="w-20 rounded-xl border border-sky-200/50 bg-white/80 px-2 py-2.5 text-center text-2xl font-serif text-sky-500 outline-none focus:border-sky-400/60"
+                  className="w-20 rounded-xl border border-sky-200/50 dark:border-sky-500/15 bg-white/80 dark:bg-white/[0.06] px-2 py-2.5 text-center text-2xl font-serif text-sky-500 outline-none focus:border-sky-400/60"
                 />
               </div>
               <span className="text-2xl text-blush-300/50 mt-4 font-serif">
@@ -117,7 +117,7 @@ export default function SyncTimerPanel({
                       Math.min(59, Math.max(0, parseInt(e.target.value) || 0))
                     )
                   }
-                  className="w-20 rounded-xl border border-sky-200/50 bg-white/80 px-2 py-2.5 text-center text-2xl font-serif text-sky-500 outline-none focus:border-sky-400/60"
+                  className="w-20 rounded-xl border border-sky-200/50 dark:border-sky-500/15 bg-white/80 dark:bg-white/[0.06] px-2 py-2.5 text-center text-2xl font-serif text-sky-500 outline-none focus:border-sky-400/60"
                 />
               </div>
             </div>
@@ -141,19 +141,19 @@ export default function SyncTimerPanel({
       </div>
 
       {/* Join section */}
-      <div className="space-y-2.5 rounded-2xl bg-white/60 border border-sky-200/40 p-4 backdrop-blur-sm shadow-sm">
+      <div className="space-y-2.5 rounded-2xl bg-white/60 dark:bg-white/[0.06] border border-sky-200/40 dark:border-sky-500/15 p-4 backdrop-blur-sm shadow-sm">
         <input
           type="text"
           value={timerId}
           onChange={(e) => setTimerId(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleJoin()}
           placeholder={t.pasteTimerId}
-          className="w-full rounded-xl border border-sky-200/50 bg-white/80 px-4 py-3 text-center text-sky-600 placeholder-sky-300/50 outline-none transition-all focus:border-sky-400/60 focus:ring-1 focus:ring-sky-300/30 text-sm"
+          className="w-full rounded-xl border border-sky-200/50 dark:border-sky-500/15 bg-white/80 dark:bg-white/[0.06] px-4 py-3 text-center text-sky-600 dark:text-sky-400 placeholder-sky-300/50 outline-none transition-all focus:border-sky-400/60 focus:ring-1 focus:ring-sky-300/30 text-sm"
         />
         <button
           onClick={handleJoin}
           disabled={!timerId.trim()}
-          className="w-full rounded-xl bg-white/80 border border-sky-200/50 px-4 py-2.5 font-serif text-base text-sky-500 transition-all hover:bg-sky-50 hover:border-sky-300/50 disabled:opacity-30 disabled:cursor-not-allowed active:scale-[0.98]"
+          className="w-full rounded-xl bg-white/80 dark:bg-white/[0.06] border border-sky-200/50 dark:border-sky-500/15 px-4 py-2.5 font-serif text-base text-sky-500 transition-all hover:bg-sky-50 dark:hover:bg-white/10 hover:border-sky-300/50 disabled:opacity-30 disabled:cursor-not-allowed active:scale-[0.98]"
         >
           {t.joinTimer}
         </button>

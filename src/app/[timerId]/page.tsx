@@ -10,6 +10,7 @@ import TimerIdBadge from "@/components/TimerIdBadge";
 import CinnamonKitty from "@/components/CinnamonKitty";
 import Sparkles from "@/components/Sparkles";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import ThemeToggle from "@/components/ThemeToggle";
 import FunFacts from "@/components/FunFacts";
 import Link from "next/link";
 import { useI18n } from "@/contexts/I18nContext";
@@ -35,7 +36,7 @@ export default function TimerPage({
 
   if (isLoading) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center bg-[#f0f4fa]">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-[#f0f4fa] dark:bg-[#141a2e]">
         <CinnamonKitty size="sm" />
         <p className="mt-4 text-sky-400/70 font-serif text-lg italic">
           {t.warmingUp}
@@ -46,7 +47,7 @@ export default function TimerPage({
 
   if (error || !timerState) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center bg-[#f0f4fa] px-4">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-[#f0f4fa] dark:bg-[#141a2e] px-4">
         <CinnamonKitty size="sm" />
         <h2 className="mt-4 font-serif text-2xl text-sky-500">
           {t.timerNotFound}
@@ -67,11 +68,12 @@ export default function TimerPage({
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center px-4 overflow-hidden">
       {/* Soft pastel background */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-50 via-[#f0f4fa] to-blush-50" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-50 via-[#f0f4fa] to-blush-50 dark:from-[#0f1525] dark:via-[#141a2e] dark:to-[#1a1528]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(133,193,255,0.08)_0%,_transparent_60%)]" />
 
-      {/* Language switcher */}
-      <div className="absolute top-4 right-4 z-20">
+      {/* Controls */}
+      <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
+        <ThemeToggle />
         <LanguageSwitcher />
       </div>
 
@@ -81,7 +83,7 @@ export default function TimerPage({
         {/* Top bar */}
         <div className="flex w-full max-w-lg items-center justify-between">
           <TimerIdBadge id={timerId} />
-          <span className="rounded-full bg-white/70 border border-sky-200/50 px-4 py-1.5 text-sm text-sky-500 capitalize font-serif shadow-sm">
+          <span className="rounded-full bg-white/70 dark:bg-white/[0.06] border border-sky-200/50 dark:border-sky-500/15 px-4 py-1.5 text-sm text-sky-500 capitalize font-serif shadow-sm">
             {timerState.mode === "stopwatch" ? t.stopwatch : t.countdown}
           </span>
         </div>
@@ -129,7 +131,7 @@ export default function TimerPage({
               {timerState.mode === "countdown" ? t.deleteCountdown : t.deleteStopwatch}
             </button>
           ) : (
-            <div className="flex flex-col items-center gap-2 rounded-2xl bg-white/80 border border-red-200/50 px-5 py-3 backdrop-blur-sm shadow-sm">
+            <div className="flex flex-col items-center gap-2 rounded-2xl bg-white/80 dark:bg-white/[0.06] border border-red-200/50 dark:border-red-500/20 px-5 py-3 backdrop-blur-sm shadow-sm">
               <p className="text-xs text-red-400/80 font-serif text-center">
                 {timerState.mode === "countdown" ? t.deleteCountdownConfirm : t.deleteStopwatchConfirm}
               </p>
@@ -143,7 +145,7 @@ export default function TimerPage({
                 </button>
                 <button
                   onClick={() => setShowDeleteConfirm(false)}
-                  className="rounded-xl bg-white border border-sky-200/50 px-4 py-1.5 text-xs text-sky-400 font-serif transition-all hover:bg-sky-50 active:scale-95"
+                  className="rounded-xl bg-white dark:bg-white/[0.06] border border-sky-200/50 dark:border-sky-500/15 px-4 py-1.5 text-xs text-sky-400 font-serif transition-all hover:bg-sky-50 dark:hover:bg-white/10 active:scale-95"
                 >
                   cancel
                 </button>

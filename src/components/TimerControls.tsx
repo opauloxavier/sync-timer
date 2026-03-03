@@ -24,7 +24,7 @@ export default function TimerControls({
         className={`group flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full transition-all active:scale-90 ${
           status !== "running"
             ? "bg-gradient-to-br from-sky-400 to-sky-500 text-white shadow-lg shadow-sky-300/30 hover:shadow-sky-300/50 hover:scale-105"
-            : "bg-sky-100 text-sky-300 cursor-not-allowed"
+            : "bg-sky-100 dark:bg-sky-900/30 text-sky-300 cursor-not-allowed"
         }`}
         aria-label="Play"
       >
@@ -44,7 +44,7 @@ export default function TimerControls({
         className={`group flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full transition-all active:scale-90 ${
           status === "running"
             ? "bg-gradient-to-br from-blush-300 to-blush-400 text-white shadow-lg shadow-blush-300/30 hover:shadow-blush-300/50 hover:scale-105"
-            : "bg-blush-100 text-blush-300 cursor-not-allowed"
+            : "bg-blush-100 dark:bg-blush-500/10 text-blush-300 cursor-not-allowed"
         }`}
         aria-label="Pause"
       >
@@ -60,7 +60,7 @@ export default function TimerControls({
       {/* Restart */}
       <button
         onClick={onRestart}
-        className="group flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full bg-white/80 border border-sky-200/50 text-sky-400 transition-all active:scale-90 hover:bg-white hover:text-blush-400 hover:border-blush-200/50 hover:scale-105 shadow-sm"
+        className="group flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full bg-white/80 dark:bg-white/[0.06] border border-sky-200/50 dark:border-sky-500/15 text-sky-400 transition-all active:scale-90 hover:bg-white dark:hover:bg-white/10 hover:text-blush-400 hover:border-blush-200/50 hover:scale-105 shadow-sm"
         aria-label="Restart"
       >
         <svg

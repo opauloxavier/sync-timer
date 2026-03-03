@@ -21,7 +21,7 @@ export default function TimerIdBadge({ id }: TimerIdBadgeProps) {
   return (
     <button
       onClick={handleCopy}
-      className="flex items-center gap-2 rounded-full bg-white/70 border border-sky-200/50 px-3 py-1.5 text-xs text-sky-500 transition-all hover:bg-white hover:border-blush-200/50 active:scale-95 shadow-sm"
+      className="flex items-center gap-2 rounded-full bg-white/70 dark:bg-white/[0.06] border border-sky-200/50 dark:border-sky-500/15 px-3 py-1.5 text-xs text-sky-500 transition-all hover:bg-white dark:hover:bg-white/10 hover:border-blush-200/50 active:scale-95 shadow-sm"
       title="Click to copy timer URL"
     >
       <svg

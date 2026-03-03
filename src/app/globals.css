@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   /* Cinnamoroll white/cream */
   --color-cinnamoroll-50: #fefefe;
@@ -169,7 +171,17 @@ body {
   color: #3a4a6b;
 }
 
+.dark body {
+  background: #141a2e;
+  color: #c8d3e8;
+}
+
 ::selection {
   background: rgba(91, 168, 245, 0.2);
   color: #2a3a5b;
+}
+
+.dark ::selection {
+  background: rgba(91, 168, 245, 0.35);
+  color: #e2e8f0;
 }

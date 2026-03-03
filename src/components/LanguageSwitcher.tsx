@@ -13,7 +13,7 @@ export default function LanguageSwitcher() {
   const { locale, setLocale } = useI18n();
 
   return (
-    <div className="flex items-center gap-1 rounded-full bg-white/60 border border-sky-200/40 p-0.5 shadow-sm">
+    <div className="flex items-center gap-1 rounded-full bg-white/60 dark:bg-white/[0.06] border border-sky-200/40 dark:border-sky-500/15 p-0.5 shadow-sm">
       {languages.map((lang) => (
         <button
           key={lang.code}

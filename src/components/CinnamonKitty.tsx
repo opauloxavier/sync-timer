@@ -43,25 +43,25 @@ export default function CinnamonKitty({ size = "lg" }: CinnamonKittyProps) {
     <div className="relative">
       {/* Sparkles around the character */}
       <div
-        className={`absolute -top-2 -left-3 animate-sparkle ${sparkleSize} text-sky-300/50`}
+        className={`absolute -top-2 -left-3 animate-sparkle ${sparkleSize} text-sky-300/50 dark:text-sky-400/35`}
         style={{ animationDelay: "0s" }}
       >
         &#10022;
       </div>
       <div
-        className={`absolute -top-1 -right-3 animate-sparkle ${sparkleSize} text-blush-300/50`}
+        className={`absolute -top-1 -right-3 animate-sparkle ${sparkleSize} text-blush-300/50 dark:text-blush-400/35`}
         style={{ animationDelay: "0.8s" }}
       >
         &#10022;
       </div>
       <div
-        className={`absolute -bottom-1 -left-2 animate-sparkle ${sparkleSize} text-blush-300/40`}
+        className={`absolute -bottom-1 -left-2 animate-sparkle ${sparkleSize} text-blush-300/40 dark:text-blush-400/25`}
         style={{ animationDelay: "1.4s" }}
       >
         &#9829;
       </div>
       <div
-        className={`absolute -bottom-2 -right-2 animate-sparkle ${sparkleSize} text-sky-300/40`}
+        className={`absolute -bottom-2 -right-2 animate-sparkle ${sparkleSize} text-sky-300/40 dark:text-sky-400/25`}
         style={{ animationDelay: "0.5s" }}
       >
         &#9829;
